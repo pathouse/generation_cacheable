@@ -1,6 +1,6 @@
 # -*- encoding: utf-8 -*-
 $:.push File.expand_path("../lib", __FILE__)
-require "generation_cacheable/version"
+require "gen_cache/version"
 
 Gem::Specification.new do |s|
   s.name        = "generation_cacheable"
