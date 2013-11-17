@@ -46,7 +46,7 @@ While working with simple cacheable I became very dissastisifed with how associa
 
 #### Cache Implementations Shouldn't Think About Rails Associations
 
-In a fetch operation, the cache is read, the value is found, or a block is executed to find that value and then it's written to the cache. That's it. Caching should neither know nor car where that value is coming from and what its relation is to the model executing the fetch request.
+In a fetch operation, the cache is read, the value is found, or a block is executed to find that value and then it's written to the cache. That's it. Caching should neither know nor care where that value is coming from and what its relation is to the model executing the fetch request.
 In a similar vein, when a model goes to expire its cache, it should do only that and not have to worry about expiring its associations. 
 
 So association caches work something like this:
