@@ -67,4 +67,6 @@ The name comes from hash "generations" (also borrowed from [identity cache](http
 
 1. Model Generations - based on the schema, these generations naturally expire when columns are added to or removed from the database. So after a migration, everything in the cache for a given model expires. 
 
-2. Instance Generations - based on an instances attributes, these generations naturally expire only when some value has changed. These expirations only affect method and association caches. 
+2. Instance Generations - based on an instances attributes, these generations naturally expire only when some value has changed. These expirations only affect method and association caches.
+
+Key caches, attributes caches, and class method caches are all manually expired as part of an `after_commit` hook. 
