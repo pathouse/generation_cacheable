@@ -6,7 +6,7 @@ A rails cache implementation that began as a fork of [simple cacheable](https://
 Usage
 --------
 
-`gem generation_cacheable, ~>1.0.0`
+`gem generation_cacheable`
 
 ```ruby
 class User < ActiveRecord::Base
