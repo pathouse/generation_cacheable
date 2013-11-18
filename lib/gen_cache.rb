@@ -19,7 +19,7 @@ module GenCache
                         :cached_methods,
                         :cached_class_methods,
                         :cached_associations
-      after_commit :expire_all
+      after_commit :expire_model_cache
     end
   end
 

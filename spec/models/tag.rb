@@ -1,5 +1,5 @@
 class Tag < ActiveRecord::Base
-	include Cacheable
+	include GenCache
 
   has_and_belongs_to_many :posts
 

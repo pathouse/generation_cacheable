@@ -3,6 +3,7 @@ module GenCache
 
     def with_association(*association_names)
       self.cached_associations ||= []
+      self.cached_associations += base_class.cached_associations
       self.cached_associations += association_names
 
       association_names.each do |assoc_name|

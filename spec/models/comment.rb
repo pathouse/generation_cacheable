@@ -1,5 +1,5 @@
 class Comment < ActiveRecord::Base
-  include Cacheable
+  include GenCache
 
   belongs_to :commentable, :polymorphic => true
 

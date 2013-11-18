@@ -1,13 +1,13 @@
 module GenCache
 
-  def expire_all
+  def expire_model_cache
     GenCache.expire(self)
   end
 
   # Manual expiry initiated by an object after commit
   # only has to worry about key_cache, attribute_cache, and class_method_cache
   def self.expire(object)
-    expire_instance_key(object)
+    expire_instance_key(object) if object.persisted?
     expire_class_method_keys(object)
     expire_attribute_keys(object)
   end

@@ -1,5 +1,5 @@
 class Post < ActiveRecord::Base
-  include Cacheable
+  include GenCache
 
   belongs_to :location
   belongs_to :user

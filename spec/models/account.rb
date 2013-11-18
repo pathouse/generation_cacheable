@@ -1,5 +1,5 @@
 class Account < ActiveRecord::Base
-	include Cacheable 
+	include GenCache 
 	
   belongs_to :user
 

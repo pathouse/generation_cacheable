@@ -18,6 +18,7 @@ module GenCache
 
   # => "users/5821759535148822589/64"
   def self.instance_key(klass, id)
+    klass = klass.base_class
     {type: :object,
      key: [model_prefix(klass), id].join("/") }
   end
@@ -25,6 +26,7 @@ module GenCache
   # => "users/5821759535148822589/attribute/value"
   # => "users/5821759535148822589/all/attribute/value"
   def self.attribute_key(klass, attribute, args, options={})
+    klass = klass.base_class
     att_args = [attribute, symbolize_args([args])].join("/")
     unless options[:all]
       { type: :object,
@@ -37,11 +39,13 @@ module GenCache
 
   # => "users/5821759535148822589/method"
   def self.class_method_key(klass, method)
+    klass = klass.base_class
     { type: :method, 
       key: [model_prefix(klass), method].join("/") }
   end
 
   def self.all_class_method_keys(klass)
+    klass = klass.base_class
     klass.cached_class_methods.map { |c_method| class_method_key(klass, c_method) }
   end
 
@@ -53,7 +57,7 @@ module GenCache
     atts = instance.attributes
     att_string = atts.sort.map { |k, v| [k,v].join(":") }.join(",")
     generation = CityHash.hash64(att_string)
-    [model_prefix(instance.class), instance.id, generation].join("/")
+    [model_prefix(instance.class.base_class), instance.id, generation].join("/")
   end
  
   # => "users/5821759535148822589/64/12126514016877773284/method"

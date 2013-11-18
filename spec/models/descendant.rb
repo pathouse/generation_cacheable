@@ -1,4 +1,5 @@
 class Descendant < User
+  include GenCache
 
   belongs_to :location
 

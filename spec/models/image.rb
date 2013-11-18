@@ -1,5 +1,5 @@
 class Image < ActiveRecord::Base
-	include Cacheable
+	include GenCache
 
   belongs_to :viewable, :polymorphic => true
 

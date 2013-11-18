@@ -1,4 +1,5 @@
 class Group < ActiveRecord::Base
+	include GenCache
 
   has_many :accounts
 

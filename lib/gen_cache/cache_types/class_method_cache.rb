@@ -4,6 +4,7 @@ module GenCache
     # Should expire on any instance save
     def with_class_method(*methods)
       self.cached_class_methods ||= []
+      self.cached_class_methods += base_class.cached_class_methods
       self.cached_class_methods += methods
 
       methods.each do |meth|

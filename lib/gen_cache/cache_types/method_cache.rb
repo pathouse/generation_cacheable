@@ -2,6 +2,7 @@ module GenCache
   module MethodCache
     def with_method(*methods)
       self.cached_methods ||= []
+      self.cached_methods += base_class.cached_methods
       self.cached_methods += methods
 
       methods.each do |meth|

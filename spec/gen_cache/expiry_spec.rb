@@ -22,7 +22,7 @@ describe GenCache do
       User.find_cached(user.id)
       key = GenCache.instance_key(User, user.id)
       Rails.cache.read(key[:key]).should_not be_nil
-      user.expire_all
+      user.expire_model_cache
       Rails.cache.read(key[:key]).should be_nil
     end
 
@@ -30,7 +30,7 @@ describe GenCache do
       user = User.find_cached_by_login("flyerhzm")
       key = GenCache.attribute_key(User, :login, "flyerhzm")
       Rails.cache.read(key[:key]).should == {:class => user.class, 'attributes' => user.attributes}
-      user.expire_all
+      user.expire_model_cache
       Rails.cache.read(key[:key]).should be_nil
     end
 
@@ -47,7 +47,7 @@ describe GenCache do
       Post.cached_default_post
       key = GenCache.class_method_key(Post, :default_post)
       Rails.cache.read(key[:key]).should_not be_nil
-      @post1.expire_all
+      @post1.expire_model_cache
       Rails.cache.read(key[:key]).should be_nil
     end
 
@@ -55,7 +55,7 @@ describe GenCache do
       Post.cached_retrieve_with_user_id(1)
       key = GenCache.class_method_key(Post, :retrieve_with_user_id)
       Rails.cache.read(key[:key]).should_not be_nil
-      @post1.expire_all
+      @post1.expire_model_cache
       Rails.cache.read(key[:key]).should be_nil
     end
 
@@ -64,7 +64,7 @@ describe GenCache do
       Post.cached_retrieve_with_user_id(2)
       key = GenCache.class_method_key(Post, :retrieve_with_user_id)
       Rails.cache.read(key[:key]).should_not be_nil
-      @post1.expire_all
+      @post1.expire_model_cache
       Rails.cache.read(key[:key]).should be_nil
     end
 
@@ -72,7 +72,7 @@ describe GenCache do
       Post.cached_retrieve_with_both(1, 1)
       key = GenCache.class_method_key(Post, :retrieve_with_both)
       Rails.cache.read(key[:key]).should_not be_nil
-      @post1.expire_all
+      @post1.expire_model_cache
       Rails.cache.read(key[:key]).should be_nil
     end
 
@@ -109,7 +109,7 @@ describe GenCache do
         Rails.cache.read(key[:key]).should be_nil
         User.cached_default_name
         Rails.cache.read(key[:key]).should == "flyerhzm"
-        user.expire_all
+        user.expire_model_cache
         Rails.cache.read(key[:key]).should be_nil
       end
     end
@@ -149,7 +149,7 @@ describe GenCache do
           Rails.cache.read(key[:key]).should be_nil
           Descendant.find_cached_by_login("scotterc").should == descendant
           Rails.cache.read(key[:key]).should == {:class => descendant.class, 'attributes' => descendant.attributes}
-          descendant.expire_all
+          descendant.expire_model_cache
           Rails.cache.read(key[:key]).should be_nil
         end
       end
@@ -172,7 +172,7 @@ describe GenCache do
           Rails.cache.read(key[:key]).should be_nil
           Descendant.cached_default_name
           Rails.cache.read(key[:key]).should == "ScotterC"
-          descendant.expire_all
+          descendant.expire_model_cache
           Rails.cache.read(key[:key]).should be_nil
         end
       end

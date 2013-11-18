@@ -1,5 +1,5 @@
 class User < ActiveRecord::Base
-  include Cacheable
+  include GenCache
 
   has_many :posts
   has_one :account

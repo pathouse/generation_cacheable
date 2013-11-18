@@ -2,6 +2,7 @@ module GenCache
   module AttributeCache
     def with_attribute(*attributes)
       self.cached_indices ||= {}
+      self.cached_indices.merge!(base_class.cached_indices)
       self.cached_indices = self.cached_indices.merge(attributes.each_with_object({}) {
         |attribute, indices| indices[attribute] = {}
       })
