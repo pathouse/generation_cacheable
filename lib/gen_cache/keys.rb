@@ -62,12 +62,14 @@ module GenCache
  
   # => "users/5821759535148822589/64/12126514016877773284/method"
   def self.method_key(instance, method)
+    return false unless instance.persisted?
     { type: :method,
       key: [instance_prefix(instance), method].join("/") }
   end
 
   # => "users/5821759535148822589/64/12126514016877773284/association"
   def self.association_key(instance, association)
+    return false unless instance.persisted?
     { type: :association,
       key: [instance_prefix(instance), association].join("/") }
   end 

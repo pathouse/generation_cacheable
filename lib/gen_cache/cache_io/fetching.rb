@@ -1,10 +1,12 @@
 module GenCache
 
 	def self.fetch(key_blob, options={}, &block)
-		unless key_blob.is_a?(Array)
+		if key_blob.is_a?(Array)
+			multiple_fetch(key_blob) { yield if block_given? }
+		elsif key_blob.is_a?(Hash)
 			single_fetch(key_blob, options) { yield if block_given? }
 		else
-			multiple_fetch(key_blob) { yield if block_given? }
+			yield if block_given?
 		end
 	end
 
