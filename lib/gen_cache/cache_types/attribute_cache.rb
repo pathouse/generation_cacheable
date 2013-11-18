@@ -13,7 +13,7 @@ module GenCache
           self.cached_indices["#{attribute}"] << value
           cache_key = GenCache.attribute_key(self, attribute, value)
           GenCache.fetch(cache_key) do
-            self.send("find_by_#{attribute}", value)
+            self.send("where", {"#{attribute}".to_sym => value}).first
           end
         end
 
@@ -22,7 +22,7 @@ module GenCache
           self.cached_indices["#{attribute}"] << value
           cache_key = GenCache.attribute_key(self, attribute, value, all: true)
           GenCache.fetch(cache_key) do
-            self.send("find_all_by_#{attribute}", value)
+            self.send("where", {"#{attribute}".to_sym => value}).to_a
           end
         end
       end
